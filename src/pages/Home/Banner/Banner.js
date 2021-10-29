@@ -1,25 +1,49 @@
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Button, Carousel, Col, Row } from 'react-bootstrap';
+import { Button, Carousel, Col, Container, Row } from 'react-bootstrap';
 import carouselOne from '../../../images/carousel/carousel-1.jpg';
 import carouselTwo from '../../../images/carousel/carousel-2.jpg';
 import carouselThree from '../../../images/carousel/carousel-3.png';
 
 const Banner = () => {
+  const carousels = [
+    {
+      id: 1,
+      image: carouselOne,
+      alt: 'first slide',
+    },
+    {
+      id: 2,
+      image: carouselTwo,
+      alt: 'second slide',
+    },
+    {
+      id: 3,
+      image: carouselThree,
+      alt: 'third slide',
+    },
+  ];
   return (
-    <div>
+    <Container fluid>
       <Row className="bg-warning">
-        <Col className="text-center d-flex justify-content-center align-items-center">
+        <Col
+          xs={12}
+          md
+          className="text-center d-flex justify-content-center align-items-center"
+        >
           <div>
             {/* banner title */}
-            <div classname="my-3">
-              <h1 className="banner__title">#1 Platform for Food Delivery</h1>
+            <div className="my-3">
+              <h1 className="banner__title d-3">
+                <span className="text-primary">#1</span> Platform for Food
+                Delivery
+              </h1>
               <small>get special dishes in low price</small>
             </div>
             <Button
               variant="outline-info"
-              className="mt-3"
+              className="my-3"
               style={{ width: 200 }}
             >
               <span className="pe-2">Order food</span>
@@ -27,33 +51,21 @@ const Banner = () => {
             </Button>
           </div>
         </Col>
-        <Col>
+        <Col xs={12} md>
           <Carousel fade>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={carouselOne}
-                alt="First slide"
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={carouselTwo}
-                alt="Second slide"
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={carouselThree}
-                alt="Third slide"
-              />
-            </Carousel.Item>
+            {carousels.map((carousel) => (
+              <Carousel.Item key={carousel.id}>
+                <img
+                  className="d-block w-100"
+                  src={carousel.image}
+                  alt={carousel.alt}
+                />
+              </Carousel.Item>
+            ))}
           </Carousel>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 
