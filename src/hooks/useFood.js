@@ -4,7 +4,7 @@ const useFood = () => {
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    fetch('')
+    fetch('https://infinite-woodland-69947.herokuapp.com/')
       .then((res) => res.json())
       .then((data) => setFoods(data));
   }, []);

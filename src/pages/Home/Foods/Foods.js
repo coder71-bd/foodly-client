@@ -1,7 +1,17 @@
 import React from 'react';
+import useFood from '../../../hooks/useFood';
+import Food from '../../Shared/Food/Food';
 
 const Foods = () => {
-  return <div>Main services are here. this foods will be order by user</div>;
+  const [foods] = useFood();
+
+  return (
+    <section>
+      {foods.map((food) => (
+        <Food key={food._id} food={food} />
+      ))}
+    </section>
+  );
 };
 
 export default Foods;
