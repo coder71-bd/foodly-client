@@ -1,4 +1,9 @@
-import { faClock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import {
+  faClock,
+  faExclamationTriangle,
+  faSkullCrossbones,
+  faThumbsUp,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { Badge, Button, Card, Col, Row } from 'react-bootstrap';
@@ -13,6 +18,23 @@ const MyOrderCard = ({ myOrder }) => {
       .then((res) => res.json())
       .then((data) => setFood(data));
   }, [myOrder.product_id]);
+
+  const message = (
+    <div>
+      <FontAwesomeIcon icon={faExclamationTriangle} style={{ color: 'red' }} />
+      <span className="ps-2 fs-3">
+        Are you sure? You want to cancel the order.
+      </span>
+    </div>
+  );
+
+  const buttonIcon = (
+    <Button variant="danger">
+      <span className="pe-2">Cancel</span>
+      <FontAwesomeIcon icon={faSkullCrossbones} />
+    </Button>
+  );
+
   return (
     <Card style={{ maxWidth: '35rem' }} className="rounded-3 my-3 px-md-0 px-3">
       <div className="d-flex justify-content-between aligin-items-center my-2">
@@ -24,7 +46,7 @@ const MyOrderCard = ({ myOrder }) => {
         </Card.Text>
         <div className="text-center">
           {myOrder.status === 'pending' ? (
-            <ConfirmModal />
+            <ConfirmModal message={message} buttonIcon={buttonIcon} />
           ) : (
             <Button variant="success">
               <FontAwesomeIcon icon={faThumbsUp} />
