@@ -9,7 +9,10 @@ const Home = () => {
     <div>
       <Banner />
       <Features />
-      <Foods />
+      <div>
+        <h3 className="text-center text-primary">Order your favourite food</h3>
+        <Foods />
+      </div>
       <Faq />
     </div>
   );

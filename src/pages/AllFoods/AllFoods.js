@@ -1,7 +1,17 @@
 import React from 'react';
+import useFood from '../../hooks/useFood';
+import Food from '../Shared/Food/Food';
 
-const AllFoods = () => {
-  return <div>here will be all the available foods</div>;
+const Foods = () => {
+  const [foods] = useFood();
+
+  return (
+    <section className="d-flex flex-wrap justify-content-evenly">
+      {foods.map((food) => (
+        <Food key={food._id} food={food} />
+      ))}
+    </section>
+  );
 };
 
-export default AllFoods;
+export default Foods;

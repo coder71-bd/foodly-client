@@ -1,14 +1,14 @@
-import { Accordion, Col, Row } from 'react-bootstrap';
+import { Accordion, Col, Container, Row } from 'react-bootstrap';
 import faq from '../../../images/faq.png';
 
 const Faq = () => {
   return (
-    <div>
-      <h3 className="text-center">Frequently Asked Questions</h3>
+    <Container className="my-3">
+      <h3 className="text-center text-primary">Frequently Asked Questions</h3>
 
-      <Row>
+      <Row className="align-items-center">
         {/* faqs */}
-        <Col>
+        <Col xs={12} lg>
           <Accordion defaultActiveKey="0">
             {/* faq 1 */}
             <Accordion.Item eventKey="0">
@@ -50,11 +50,11 @@ const Faq = () => {
         </Col>
 
         {/* faq image */}
-        <Col>
-          <img src={faq} alt="faq" />
+        <Col xs={12} lg>
+          <img className="img-fluid" src={faq} alt="faq" />
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 

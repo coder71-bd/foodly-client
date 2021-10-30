@@ -38,7 +38,12 @@ const Header = () => {
         >
           FOODLY
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          style={{ backgroundColor: 'salmon' }}
+        />
+
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto fs-5">
             <Nav.Link as={Link} to="/home" className="text-white">

@@ -13,6 +13,7 @@ const Food = ({ food }) => {
     for (let i = 0; i < r; i++) {
       ratingArr.push(
         <FontAwesomeIcon
+          key={i}
           className="fs-4"
           icon={faStar}
           style={{ color: 'tomato' }}
@@ -22,6 +23,7 @@ const Food = ({ food }) => {
     for (let i = r; i < 5; i++) {
       ratingArr.push(
         <FontAwesomeIcon
+          key={i}
           className="fs-4"
           icon={faStarHalfAlt}
           style={{ color: 'tomato' }}

@@ -6,7 +6,7 @@ const Foods = () => {
   const [foods] = useFood();
 
   return (
-    <section>
+    <section className="d-flex flex-wrap justify-content-evenly">
       {foods.map((food) => (
         <Food key={food._id} food={food} />
       ))}
