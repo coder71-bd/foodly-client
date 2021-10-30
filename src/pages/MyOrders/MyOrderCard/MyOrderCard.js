@@ -5,6 +5,7 @@ import {
   faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Badge, Button, Card, Col, Row } from 'react-bootstrap';
 import ConfirmModal from '../../Shared/ConfirmModal/ConfirmModal';
@@ -12,11 +13,11 @@ import ConfirmModal from '../../Shared/ConfirmModal/ConfirmModal';
 const MyOrderCard = ({ myOrder }) => {
   const [food, setFood] = useState({});
   useEffect(() => {
-    fetch(
-      `https://infinite-woodland-69947.herokuapp.com/food/${myOrder.product_id}`
-    )
-      .then((res) => res.json())
-      .then((data) => setFood(data));
+    axios
+      .get(
+        `https://infinite-woodland-69947.herokuapp.com/food/${myOrder.product_id}`
+      )
+      .then((response) => setFood(response.data));
   }, [myOrder.product_id]);
 
   const message = (

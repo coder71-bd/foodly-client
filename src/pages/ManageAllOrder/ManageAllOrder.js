@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import TableRow from './TableRow/TableRow';
@@ -5,9 +6,9 @@ const ManageAllOrder = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch('https://infinite-woodland-69947.herokuapp.com/order/')
-      .then((res) => res.json())
-      .then((data) => setOrders(data));
+    axios
+      .get('https://infinite-woodland-69947.herokuapp.com/order/')
+      .then((response) => setOrders(response.data));
   }, []);
 
   return (

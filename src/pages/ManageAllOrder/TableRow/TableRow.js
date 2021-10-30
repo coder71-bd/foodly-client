@@ -4,6 +4,7 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Badge, Button } from 'react-bootstrap';
 import ConfirmModal from '../../Shared/ConfirmModal/ConfirmModal';
@@ -11,11 +12,11 @@ import ConfirmModal from '../../Shared/ConfirmModal/ConfirmModal';
 const TableRow = ({ order, index }) => {
   const [food, setFood] = useState({});
   useEffect(() => {
-    fetch(
-      `https://infinite-woodland-69947.herokuapp.com/food/${order.product_id}`
-    )
-      .then((res) => res.json())
-      .then((data) => setFood(data));
+    axios
+      .get(
+        `https://infinite-woodland-69947.herokuapp.com/food/${order.product_id}`
+      )
+      .then((response) => setFood(response.data));
   }, [order.product_id]);
 
   // reject modal
