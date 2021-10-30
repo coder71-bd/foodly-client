@@ -11,8 +11,30 @@ const ManageAllOrder = () => {
       .then((response) => setOrders(response.data));
   }, []);
 
+  const handleApproveOrder = (id) => {
+    axios
+      .put(`https://infinite-woodland-69947.herokuapp.com/order/${id}`)
+      .then(() => {
+        axios
+          .get('https://infinite-woodland-69947.herokuapp.com/order/')
+          .then((response) => setOrders(response.data));
+      });
+  };
+
+  const handleRejectOrder = (id) => {
+    axios
+      .delete(`https://infinite-woodland-69947.herokuapp.com/order/${id}`)
+      .then(() => {
+        const filteredOrder = orders.filter((order) => order._id !== id);
+        setOrders(filteredOrder);
+      });
+  };
+
   return (
-    <Container>
+    <Container
+      className=" d-flex justify-content-center align-items-center my-3"
+      style={{ minHeight: 'calc(100vh - 270px)' }}
+    >
       <Table responsive striped bordered hover>
         <thead>
           <tr className="text-center">
@@ -26,7 +48,13 @@ const ManageAllOrder = () => {
         </thead>
         <tbody>
           {orders.map((order, i) => (
-            <TableRow key={order._id} index={i} order={order} />
+            <TableRow
+              key={order._id}
+              index={i}
+              order={order}
+              handleApproveOrder={handleApproveOrder}
+              handleRejectOrder={handleRejectOrder}
+            />
           ))}
         </tbody>
       </Table>

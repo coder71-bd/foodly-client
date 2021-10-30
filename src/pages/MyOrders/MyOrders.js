@@ -11,10 +11,24 @@ const MyOrder = () => {
       .get(`https://infinite-woodland-69947.herokuapp.com/order/${email}`)
       .then((response) => setMyOrders(response.data));
   }, []);
+
+  const handleCancel = (id) => {
+    axios
+      .delete(`https://infinite-woodland-69947.herokuapp.com/order/${id}`)
+      .then(() => {
+        const filteredOrders = myOrders.filter((order) => order._id !== id);
+        setMyOrders(filteredOrders);
+      });
+  };
+
   return (
     <Row className="justify-content-evenly">
       {myOrders.map((myOrder) => (
-        <MyOrderCard key={myOrder._id} myOrder={myOrder} />
+        <MyOrderCard
+          key={myOrder._id}
+          myOrder={myOrder}
+          handleCancel={handleCancel}
+        />
       ))}
     </Row>
   );

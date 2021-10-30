@@ -1,16 +1,13 @@
-import {
-  faClock,
-  faExclamationTriangle,
-  faSkullCrossbones,
-  faThumbsUp,
-} from '@fortawesome/free-solid-svg-icons';
+import { faClock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Badge, Button, Card, Col, Row } from 'react-bootstrap';
-import ConfirmModal from '../../Shared/ConfirmModal/ConfirmModal';
+import CancelOrder from './CancelOrder/CancelOrder';
 
-const MyOrderCard = ({ myOrder }) => {
+const MyOrderCard = (props) => {
+  const { myOrder, handleCancel } = props;
+
   const [food, setFood] = useState({});
   useEffect(() => {
     axios
@@ -19,22 +16,6 @@ const MyOrderCard = ({ myOrder }) => {
       )
       .then((response) => setFood(response.data));
   }, [myOrder.product_id]);
-
-  const message = (
-    <div>
-      <FontAwesomeIcon icon={faExclamationTriangle} style={{ color: 'red' }} />
-      <span className="ps-2 fs-3">
-        Are you sure? You want to cancel the order.
-      </span>
-    </div>
-  );
-
-  const buttonIcon = (
-    <Button variant="danger">
-      <span className="pe-2">Cancel</span>
-      <FontAwesomeIcon icon={faSkullCrossbones} />
-    </Button>
-  );
 
   return (
     <Card style={{ maxWidth: '35rem' }} className="rounded-3 my-3 px-md-0 px-3">
@@ -47,7 +28,7 @@ const MyOrderCard = ({ myOrder }) => {
         </Card.Text>
         <div className="text-center">
           {myOrder.status === 'pending' ? (
-            <ConfirmModal message={message} buttonIcon={buttonIcon} />
+            <CancelOrder id={myOrder._id} handleCancel={handleCancel} />
           ) : (
             <Button variant="success">
               <FontAwesomeIcon icon={faThumbsUp} />

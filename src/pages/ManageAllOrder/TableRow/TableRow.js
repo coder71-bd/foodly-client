@@ -1,15 +1,12 @@
-import {
-  faExclamationTriangle,
-  faThumbsUp,
-  faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Badge, Button } from 'react-bootstrap';
-import ConfirmModal from '../../Shared/ConfirmModal/ConfirmModal';
+import ApproveOrder from './ApproveOrder/ApproveOrder';
+import RejectOrder from './RejectOrder/RejectOrder';
 
-const TableRow = ({ order, index }) => {
+const TableRow = ({ order, index, handleApproveOrder, handleRejectOrder }) => {
   const [food, setFood] = useState({});
   useEffect(() => {
     axios
@@ -18,35 +15,6 @@ const TableRow = ({ order, index }) => {
       )
       .then((response) => setFood(response.data));
   }, [order.product_id]);
-
-  // reject modal
-  const messageOfReject = (
-    <div>
-      <FontAwesomeIcon icon={faExclamationTriangle} className="text-danger" />
-      <span className="ps-2 fs-3">
-        Are you sure? You want to reject this order.
-      </span>
-    </div>
-  );
-
-  const buttonIconOfReject = (
-    <Button variant="danger">
-      <FontAwesomeIcon icon={faTrashAlt} />
-    </Button>
-  );
-
-  // approval modal
-  const messageOfApproval = (
-    <div>
-      <FontAwesomeIcon
-        icon={faExclamationTriangle}
-        style={{ color: 'green' }}
-      />
-      <span className="ps-2 fs-3">Do you want to approve this order.</span>
-    </div>
-  );
-
-  const buttonIconOfApproval = <Button variant="success">approve</Button>;
 
   return (
     <tr>
@@ -96,22 +64,19 @@ const TableRow = ({ order, index }) => {
       </td>
       <td className="pb-2 text-center">
         {order.status === 'pending' ? (
-          <ConfirmModal
-            message={messageOfApproval}
-            buttonIcon={buttonIconOfApproval}
+          <ApproveOrder
+            id={order._id}
+            handleApproveOrder={handleApproveOrder}
           />
         ) : (
-          <Button variant="success">
-            <FontAwesomeIcon icon={faThumbsUp} />
+          <Button variant="info">
+            <FontAwesomeIcon icon={faThumbsUp} className="text-white" />
           </Button>
         )}
       </td>
       <td className="pb-2 text-center">
         <div className="me-2">
-          <ConfirmModal
-            message={messageOfReject}
-            buttonIcon={buttonIconOfReject}
-          />
+          <RejectOrder id={order._id} handleRejectOrder={handleRejectOrder} />
         </div>
       </td>
     </tr>
