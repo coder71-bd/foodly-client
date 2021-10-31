@@ -6,7 +6,7 @@ const About = () => {
   return (
     <Container
       className=" d-flex justify-content-center align-items-center my-3"
-      style={{ minHeight: 'calc(100vh - 200px)' }}
+      style={{ minHeight: 'calc(100vh - 270px)' }}
     >
       <Row className="justify-content-center align-items-center">
         {/* about info */}

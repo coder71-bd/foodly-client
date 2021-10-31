@@ -3,7 +3,7 @@
 <div align="center">
   <h3>
   <!--add firebase hosting link here-->
-    <a href="#">
+    <a href="https://foodly-e4c7f.web.app">
       Live Demo
     </a>
   </h3>

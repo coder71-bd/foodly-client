@@ -38,7 +38,7 @@ const PlaceOrder = ({ orderedFood }) => {
   };
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 270px)' }}>
+    <div className="mt-3" style={{ minHeight: 'calc(100vh - 270px)' }}>
       <h3 className="d-3 my-3 text-center text-primary fw-bold">
         Place your order
       </h3>

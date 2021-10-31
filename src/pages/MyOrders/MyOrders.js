@@ -23,6 +23,9 @@ const MyOrder = () => {
       >
         <p className="fs-4 text-info">You haven't ordered anything yet.</p>
         <p>Please go and order something</p>
+        <p>
+          If you added order and see nothing that means we rejected your orders
+        </p>
         <NavLink to="/foods">
           <Button variant="primary" className="mb-5">
             Oder Food

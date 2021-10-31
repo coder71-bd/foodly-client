@@ -22,7 +22,7 @@ const AddFood = () => {
   };
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 270px)' }}>
+    <div className="mt-3" style={{ minHeight: 'calc(100vh - 270px)' }}>
       <h3 className="d-3 my-3 text-center text-primary fw-bold">
         Add Food in Foodly
       </h3>
@@ -33,7 +33,7 @@ const AddFood = () => {
       >
         {/* name of the food */}
         <input
-          className="input_form w-75 mb-3 d-block mx-auto form-control"
+          className="w-75 mb-3 d-block mx-auto form-control"
           placeholder="food name"
           {...register('name', {
             required: 'this field is required',
