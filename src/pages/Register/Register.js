@@ -144,13 +144,13 @@ const Register = () => {
         />
 
         <Button
-          variant="success"
+          variant="info"
           className="text-white w-50 d-block mx-auto"
           onClick={handleGoogleSignUp}
           style={{ minWidth: 150 }}
         >
           <FontAwesomeIcon icon={faGoogle} />
-          Register With Google
+          <span className="ms-3">Register With Google</span>
         </Button>
       </form>
     </div>
