@@ -4,14 +4,14 @@ import Faq from './Faq/Faq';
 import Features from './Features/Features';
 import Foods from './Foods/Foods';
 
-const Home = () => {
+const Home = ({ handleOrderNow }) => {
   return (
     <div>
       <Banner />
       <Features />
       <div>
         <h3 className="text-center text-primary">Order your favourite food</h3>
-        <Foods />
+        <Foods handleOrderNow={handleOrderNow} />
       </div>
       <Faq />
     </div>

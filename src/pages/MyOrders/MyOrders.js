@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import MyOrderCard from './MyOrderCard/MyOrderCard';
 
 const MyOrder = () => {
@@ -22,15 +22,21 @@ const MyOrder = () => {
   };
 
   return (
-    <Row className="justify-content-evenly">
-      {myOrders.map((myOrder) => (
-        <MyOrderCard
-          key={myOrder._id}
-          myOrder={myOrder}
-          handleCancel={handleCancel}
-        />
-      ))}
-    </Row>
+    <Container
+      fluid
+      className=" d-flex justify-content-center align-items-center my-3"
+      style={{ minHeight: 'calc(100vh - 270px)' }}
+    >
+      <Row className="justify-content-evenly">
+        {myOrders.map((myOrder) => (
+          <MyOrderCard
+            key={myOrder._id}
+            myOrder={myOrder}
+            handleCancel={handleCancel}
+          />
+        ))}
+      </Row>
+    </Container>
   );
 };
 

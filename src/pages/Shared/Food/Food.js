@@ -5,12 +5,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card, Col, Row } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import Ingredients from './Ingredients/Ingredients';
 
-const Food = ({ food }) => {
-  const history = useHistory();
-
+const Food = ({ food, handleOrderNow }) => {
   const showRating = (r) => {
     const ratingArr = [];
     for (let i = 0; i < r; i++) {
@@ -37,10 +35,6 @@ const Food = ({ food }) => {
     return ratingArr;
   };
 
-  const handleOrderNow = () => {
-    history.push('/place-order');
-  };
-
   return (
     <Card
       key={food._id}
@@ -62,11 +56,12 @@ const Food = ({ food }) => {
       </Row>
       <Card.Footer className="d-flex flex-wrap justify-content-between align-items-center">
         <div>{showRating(food.rating)}</div>
-
-        <Button variant="primary" onClick={handleOrderNow}>
-          <FontAwesomeIcon icon={faShoppingBasket} />
-          <span className="ps-2">order now</span>
-        </Button>
+        <NavLink to="/place-order">
+          <Button variant="primary" onClick={() => handleOrderNow(food)}>
+            <FontAwesomeIcon icon={faShoppingBasket} />
+            <span className="ps-2">order now</span>
+          </Button>
+        </NavLink>
 
         <div className="fs-2 fw-bold" style={{ color: '#d90f2d' }}>
           ${food.price}

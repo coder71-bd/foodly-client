@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import About from './pages/About/About';
 import AddFood from './pages/AddFood/AddFood';
@@ -12,21 +13,27 @@ import Footer from './pages/Shared/Footer/Footer';
 import Header from './pages/Shared/Header/Header';
 
 const App = () => {
+  const [orderedFood, setOrderedFood] = useState({});
+
+  const handleOrderNow = (food) => {
+    setOrderedFood(food);
+  };
+
   return (
     <Router>
       <Header />
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home handleOrderNow={handleOrderNow} />
         </Route>
         <Route exact path="/home">
-          <Home />
+          <Home handleOrderNow={handleOrderNow} />
         </Route>
         <Route path="/foods">
-          <AllFoods />
+          <AllFoods handleOrderNow={handleOrderNow} />
         </Route>
         <Route path="/place-order">
-          <PlaceOrder />
+          <PlaceOrder orderedFood={orderedFood} />
         </Route>
         <Route path="/my-orders">
           <MyOrders />

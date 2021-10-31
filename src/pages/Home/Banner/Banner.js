@@ -39,13 +39,9 @@ const Banner = () => {
                 <span className="text-primary">#1</span> Platform for Food
                 Delivery
               </h1>
-              <small>get special dishes in low price</small>
+              <small>Get the food you love most</small>
             </div>
-            <Button
-              variant="outline-info"
-              className="my-3"
-              style={{ width: 200 }}
-            >
+            <Button variant="info" className="my-3" style={{ width: 200 }}>
               <span className="pe-2">Order food</span>
               <FontAwesomeIcon icon={faLongArrowAltRight} />
             </Button>

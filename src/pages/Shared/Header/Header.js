@@ -58,6 +58,10 @@ const Header = () => {
               My Orders
             </Nav.Link>
 
+            <Nav.Link as={Link} to="/add-food" className="text-white">
+              Add Food
+            </Nav.Link>
+
             <Nav.Link as={Link} to="/manage-all-order" className="text-white">
               Manage all order
             </Nav.Link>
