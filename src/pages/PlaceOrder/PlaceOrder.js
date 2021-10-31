@@ -18,7 +18,6 @@ const PlaceOrder = ({ orderedFood }) => {
   const email = user.email;
 
   const onSubmit = (data) => {
-    console.log(orderedFood._id);
     if (orderedFood._id) {
       const orderData = {
         user_name,
@@ -39,6 +38,18 @@ const PlaceOrder = ({ orderedFood }) => {
 
   return (
     <div className="mt-3" style={{ minHeight: 'calc(100vh - 270px)' }}>
+      {orderedFood?.image && (
+        <div className="text-danger my-3">
+          <img
+            className="img-fluid"
+            style={{ maxWidth: 200 }}
+            src={orderedFood.image}
+            alt={orderedFood.name}
+          />
+          <div>{orderedFood?.name}</div>
+        </div>
+      )}
+
       <h3 className="d-3 my-3 text-center text-primary fw-bold">
         Place your order
       </h3>
