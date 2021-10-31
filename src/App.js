@@ -27,38 +27,35 @@ const App = () => {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/">
-            <Home handleOrderNow={handleOrderNow} />
-          </Route>
           <Route exact path="/home">
             <Home handleOrderNow={handleOrderNow} />
           </Route>
-          <Route path="/foods">
+          <Route exact path="/foods">
             <AllFoods handleOrderNow={handleOrderNow} />
           </Route>
-          <PrivateRoute path="/place-order">
+          <PrivateRoute exact path="/place-order">
             <PlaceOrder orderedFood={orderedFood} />
           </PrivateRoute>
-          <PrivateRoute path="/my-orders">
+          <PrivateRoute exact path="/my-orders">
             <MyOrders />
           </PrivateRoute>
-          <PrivateRoute path="/manage-all-order">
+          <PrivateRoute exact path="/manage-all-order">
             <ManageAllOrder />
           </PrivateRoute>
-          <PrivateRoute path="/add-food">
+          <PrivateRoute exact path="/add-food">
             <AddFood />
           </PrivateRoute>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/register">
+          <Route exact path="/register">
             <Register />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/about">
+          <Route exact path="/about">
             <About />
+          </Route>
+          <Route exact path="/">
+            <Home handleOrderNow={handleOrderNow} />
           </Route>
           <Route path="*">
             <NotFound />
