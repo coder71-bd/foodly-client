@@ -42,8 +42,8 @@ const AddFood = () => {
               message: 'food name should be bigger than 3 characters',
             },
             maxLength: {
-              value: 9,
-              message: "food name can't exceed 6 characters",
+              value: 15,
+              message: "food name can't exceed 15 characters",
             },
           })}
         />
@@ -61,7 +61,7 @@ const AddFood = () => {
               message: 'at least add something about the food',
             },
             maxLength: {
-              value: 16,
+              value: 25,
               message: "don't add too much info about the food.",
             },
           })}

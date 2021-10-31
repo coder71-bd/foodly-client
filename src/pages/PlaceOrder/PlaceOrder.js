@@ -85,14 +85,14 @@ const PlaceOrder = ({ orderedFood }) => {
 
         {/* card number */}
         <input
-          type="number"
-          placeholder="Card Number"
+          type="text"
+          placeholder="Card Number: 111-222-333-444"
           className="w-75 mb-3 d-block mx-auto form-control"
-          {...register('card-number', {
+          {...register('card_number', {
             required: 'this field is required',
             minLength: {
               value: 3,
-              message: 'Card number is greater than 3 digit',
+              message: 'Card number should be greater than 3 digit',
             },
             maxLength: {
               value: 11,
@@ -100,8 +100,10 @@ const PlaceOrder = ({ orderedFood }) => {
             },
           })}
         />
-        {errors.card && (
-          <p className="text-danger mb-3 w-75 mx-auto">{errors.card.message}</p>
+        {errors.card_number && (
+          <p className="text-danger mb-3 w-75 mx-auto">
+            {errors.card_number.message}
+          </p>
         )}
 
         {/* order date of the customer */}
