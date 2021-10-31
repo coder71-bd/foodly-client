@@ -60,17 +60,23 @@ const Header = () => {
               Foods
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/my-orders" className="text-white">
-              My Orders
-            </Nav.Link>
+            {user.email && (
+              <Nav.Link as={Link} to="/my-orders" className="text-white">
+                My Orders
+              </Nav.Link>
+            )}
 
-            <Nav.Link as={Link} to="/add-food" className="text-white">
-              Add Food
-            </Nav.Link>
+            {user.email && (
+              <Nav.Link as={Link} to="/add-food" className="text-white">
+                Add Food
+              </Nav.Link>
+            )}
 
-            <Nav.Link as={Link} to="/manage-all-order" className="text-white">
-              Manage all order
-            </Nav.Link>
+            {user.email && (
+              <Nav.Link as={Link} to="/manage-all-order" className="text-white">
+                Manage all order
+              </Nav.Link>
+            )}
 
             <Nav.Link as={Link} to="/about" className="text-white">
               About us
