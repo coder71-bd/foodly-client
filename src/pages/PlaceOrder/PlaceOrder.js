@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
@@ -11,12 +12,23 @@ const PlaceOrder = ({ orderedFood }) => {
 
   //would come from context api
   const user_name = 'user3';
-  const email = 'use3@gmail.com';
+  const email = 'user3@gmail.com';
 
   const onSubmit = (data) => {
+    console.log(orderedFood._id);
     if (orderedFood._id) {
-      console.log({ user_name, email, product_id: orderedFood._id, ...data });
-      history.push('/my-orders');
+      const orderData = {
+        user_name,
+        email,
+        product_id: orderedFood._id,
+        ...data,
+      };
+      axios
+        .post('https://infinite-woodland-69947.herokuapp.com/order', orderData)
+        .then((response) => {
+          console.log(response);
+          history.push('/my-orders');
+        });
     } else {
       history.push('/foods');
     }

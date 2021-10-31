@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
@@ -12,8 +13,12 @@ const AddFood = () => {
   const onSubmit = (data) => {
     const ingredientArr = data.ingredients.split(',');
     data.ingredients = ingredientArr;
-    console.log(data);
-    history.push('/foods');
+    axios
+      .post('https://infinite-woodland-69947.herokuapp.com/food', data)
+      .then((response) => {
+        console.log(response);
+        history.push('/foods');
+      });
   };
 
   return (
@@ -49,7 +54,7 @@ const AddFood = () => {
         <textarea
           placeholder="about the food"
           className="w-75 mb-3 d-block mx-auto form-control"
-          {...register('food', {
+          {...register('desc', {
             required: 'this field is required',
             minLength: {
               value: 3,
@@ -61,8 +66,8 @@ const AddFood = () => {
             },
           })}
         />
-        {errors.food && (
-          <p className="text-danger mb-3 w-75 mx-auto">{errors.food.message}</p>
+        {errors.desc && (
+          <p className="text-danger mb-3 w-75 mx-auto">{errors.desc.message}</p>
         )}
 
         {/* price of the food */}
@@ -94,6 +99,10 @@ const AddFood = () => {
           placeholder="Image url"
           {...register('image', {
             required: 'this field is required',
+            pattern: {
+              value: /(https?:)?\/\/?[^'"<>]+?\.(jpg|jpeg|gif|png)/,
+              message: 'sorry! this is not an image url',
+            },
           })}
         />
         {errors.image && (

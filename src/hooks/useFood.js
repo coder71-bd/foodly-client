@@ -7,7 +7,7 @@ const useFood = () => {
   useEffect(() => {
     axios
       .get('https://infinite-woodland-69947.herokuapp.com/')
-      .then((response) => setFoods(response.data));
+      .then((response) => setFoods(response.data.reverse()));
   }, []);
 
   return [foods, setFoods];
