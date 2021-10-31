@@ -27,13 +27,13 @@ const AddFood = () => {
         Add Food in Foodly
       </h3>
       <form
-        className="w-50 mx-auto"
+        className="form w-50 mx-auto"
         onSubmit={handleSubmit(onSubmit)}
         style={{ maxWidth: 600 }}
       >
         {/* name of the food */}
         <input
-          className="w-75 mb-3 d-block mx-auto form-control"
+          className="input_form w-75 mb-3 d-block mx-auto form-control"
           placeholder="food name"
           {...register('name', {
             required: 'this field is required',

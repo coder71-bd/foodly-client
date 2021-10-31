@@ -5,3 +5,9 @@ body {
 .banner__title {
   font-family: 'Nunito', sans-serif !important;
 }
+
+@media screen and (max-width: 500px) {
+  .form {
+    width: 100% !important;
+  }
+}

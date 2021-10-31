@@ -2,6 +2,7 @@ import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Button, Carousel, Col, Container, Row } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import carouselOne from '../../../images/carousel/carousel-1.jpg';
 import carouselTwo from '../../../images/carousel/carousel-2.jpg';
 import carouselThree from '../../../images/carousel/carousel-3.png';
@@ -41,10 +42,12 @@ const Banner = () => {
               </h1>
               <small>Get the food you love most</small>
             </div>
-            <Button variant="info" className="my-3" style={{ width: 200 }}>
-              <span className="pe-2">Order food</span>
-              <FontAwesomeIcon icon={faLongArrowAltRight} />
-            </Button>
+            <NavLink to="/foods">
+              <Button variant="info" className="my-3" style={{ width: 200 }}>
+                <span className="pe-2">Order food</span>
+                <FontAwesomeIcon icon={faLongArrowAltRight} />
+              </Button>
+            </NavLink>
           </div>
         </Col>
         <Col xs={12} md>

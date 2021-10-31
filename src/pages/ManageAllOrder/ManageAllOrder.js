@@ -11,6 +11,19 @@ const ManageAllOrder = () => {
       .then((response) => setOrders(response.data));
   }, []);
 
+  if (orders.length === 0) {
+    return (
+      <section
+        className=" d-flex flex-column justify-content-center align-items-center my-3"
+        style={{ minHeight: 'calc(100vh - 270px)' }}
+      >
+        <p className="fs-4 text-info">
+          Alas! No customer haven't ordered anything yet.
+        </p>
+      </section>
+    );
+  }
+
   const handleApproveOrder = (id) => {
     axios
       .put(`https://infinite-woodland-69947.herokuapp.com/order/${id}`)
@@ -43,7 +56,7 @@ const ManageAllOrder = () => {
             <th>Order</th>
             <th>Status</th>
             <th>Approve</th>
-            <th>Reject</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>

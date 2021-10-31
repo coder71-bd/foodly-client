@@ -1,12 +1,14 @@
-import {
-  faExclamationTriangle,
-  faSkullCrossbones,
-} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-const CancelOrder = ({ id, handleCancel }) => {
+const CancelOrder = ({
+  id,
+  handleCancel,
+  cancelOrderButton,
+  cancelOrderMessage,
+}) => {
   const [show, setShow] = useState(false);
 
   // handle modal
@@ -17,10 +19,11 @@ const CancelOrder = ({ id, handleCancel }) => {
     <>
       {/* modal button */}
       <div onClick={handleShow}>
-        <Button variant="danger">
+        {cancelOrderButton}
+        {/* <Button variant="danger" className="me-3">
           <span className="pe-2">Cancel</span>
           <FontAwesomeIcon icon={faSkullCrossbones} />
-        </Button>
+        </Button> */}
       </div>
 
       {/* modal message */}
@@ -31,7 +34,8 @@ const CancelOrder = ({ id, handleCancel }) => {
             style={{ color: 'red' }}
           />
           <span className="ps-2 fs-3">
-            Are you sure? You want to cancel the order.
+            {cancelOrderMessage}
+            {/* Are you sure? You want to cancel this order. */}
           </span>
         </Modal.Body>
         <Modal.Footer>

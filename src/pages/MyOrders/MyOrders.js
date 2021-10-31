@@ -1,16 +1,36 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import MyOrderCard from './MyOrderCard/MyOrderCard';
 
 const MyOrder = () => {
   const [myOrders, setMyOrders] = useState([]);
-  const email = 'user3@gmail.com'; // would get from context api
+  const { user } = useAuth();
+
   useEffect(() => {
     axios
-      .get(`https://infinite-woodland-69947.herokuapp.com/order/${email}`)
+      .get(`https://infinite-woodland-69947.herokuapp.com/order/${user.email}`)
       .then((response) => setMyOrders(response.data));
-  }, []);
+  }, [user.email]);
+
+  if (myOrders.length === 0) {
+    return (
+      <section
+        className=" d-flex flex-column justify-content-center align-items-center my-3"
+        style={{ minHeight: 'calc(100vh - 270px)' }}
+      >
+        <p className="fs-4 text-info">You haven't ordered anything yet.</p>
+        <p>Please go and order something</p>
+        <NavLink to="/foods">
+          <Button variant="primary" className="mb-5">
+            Oder Food
+          </Button>
+        </NavLink>
+      </section>
+    );
+  }
 
   const handleCancel = (id) => {
     axios

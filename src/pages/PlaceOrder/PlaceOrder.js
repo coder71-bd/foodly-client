@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const PlaceOrder = ({ orderedFood }) => {
   const history = useHistory();
+  const { user, userName } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -11,8 +14,8 @@ const PlaceOrder = ({ orderedFood }) => {
   } = useForm();
 
   //would come from context api
-  const user_name = 'user3';
-  const email = 'user3@gmail.com';
+  const user_name = user.displayName || userName;
+  const email = user.email;
 
   const onSubmit = (data) => {
     console.log(orderedFood._id);
@@ -40,7 +43,7 @@ const PlaceOrder = ({ orderedFood }) => {
         Place your order
       </h3>
       <form
-        className="w-50 mx-auto"
+        className="form w-50 mx-auto"
         onSubmit={handleSubmit(onSubmit)}
         style={{ maxWidth: 600 }}
       >
@@ -60,7 +63,6 @@ const PlaceOrder = ({ orderedFood }) => {
 
         {/* address of the customer */}
         <input
-          type="text"
           placeholder="Address"
           className="w-75 mb-3 d-block mx-auto form-control"
           {...register('address', {
@@ -70,8 +72,8 @@ const PlaceOrder = ({ orderedFood }) => {
               message: 'Your address should be more big.',
             },
             maxLength: {
-              value: 12,
-              message: 'Your address should be within 12 characters',
+              value: 25,
+              message: 'Your address should be within 25 characters',
             },
           })}
         />
@@ -83,7 +85,7 @@ const PlaceOrder = ({ orderedFood }) => {
 
         {/* card number */}
         <input
-          type="text"
+          type="number"
           placeholder="Card Number"
           className="w-75 mb-3 d-block mx-auto form-control"
           {...register('card-number', {
@@ -103,7 +105,7 @@ const PlaceOrder = ({ orderedFood }) => {
         )}
 
         {/* order date of the customer */}
-        <div className="w-75 mb-3 d-block mx-auto form-control">
+        <div className="mb-3 w-75  mx-auto d-block form-control text-center">
           <span>date: </span>
           <input type="date" />
         </div>

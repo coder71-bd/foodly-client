@@ -30,7 +30,7 @@ const RejectOrder = ({ id, handleRejectOrder }) => {
             className="text-danger"
           />
           <span className="ps-2 fs-3">
-            Are you sure? You want to reject this order.
+            Are you sure? You want to delete this order.
           </span>
         </Modal.Body>
         <Modal.Footer>

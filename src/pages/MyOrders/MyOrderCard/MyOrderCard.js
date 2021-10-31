@@ -1,4 +1,8 @@
-import { faClock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import {
+  faClock,
+  faSkullCrossbones,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -17,10 +21,27 @@ const MyOrderCard = (props) => {
       .then((response) => setFood(response.data));
   }, [myOrder.product_id]);
 
+  const cancelOrderButton = (
+    <Button variant="danger" className="me-3">
+      <span className="pe-2">Cancel</span>
+      <FontAwesomeIcon icon={faSkullCrossbones} />
+    </Button>
+  );
+  const cancelOrderMessage = 'Are you sure? You want to cancel this order.';
+  const deleteOrderButton = (
+    <Button variant="warning" className="me-3">
+      <FontAwesomeIcon icon={faTrashAlt} className="text-primary" />
+    </Button>
+  );
+  const deleteOrderMessage = 'do you want to delete this';
+
   return (
-    <Card style={{ maxWidth: '35rem' }} className="rounded-3 my-3 px-md-0 px-3">
+    <Card
+      style={{ maxWidth: '35rem' }}
+      className="rounded-3 my-3 px-md-0 px-3 me-3"
+    >
       <div className="d-flex justify-content-between aligin-items-center my-2">
-        <Card.Text>
+        <Card.Text className="ms-3">
           <FontAwesomeIcon icon={faClock} style={{ color: '#F50EBB' }} />
           <span className="ps-2" style={{ color: '#F50EBB' }}>
             {myOrder.order_time}
@@ -28,11 +49,19 @@ const MyOrderCard = (props) => {
         </Card.Text>
         <div className="text-center">
           {myOrder.status === 'pending' ? (
-            <CancelOrder id={myOrder._id} handleCancel={handleCancel} />
+            <CancelOrder
+              id={myOrder._id}
+              handleCancel={handleCancel}
+              cancelOrderButton={cancelOrderButton}
+              cancelOrderMessage={cancelOrderMessage}
+            />
           ) : (
-            <Button variant="success">
-              <FontAwesomeIcon icon={faThumbsUp} />
-            </Button>
+            <CancelOrder
+              id={myOrder._id}
+              handleCancel={handleCancel}
+              cancelOrderButton={deleteOrderButton}
+              cancelOrderMessage={deleteOrderMessage}
+            />
           )}
         </div>
       </div>
@@ -61,8 +90,7 @@ const MyOrderCard = (props) => {
         </Col>
         <Col xs={12} sm>
           <Card.Img
-            style={{ borderRadius: '10%' }}
-            className="img-fluid mt-2"
+            className="img-fluid mt-2 pe-3 pb-3 rounded-3"
             variant="top"
             src={food.image}
             alt={food.name}

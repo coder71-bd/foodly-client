@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
-const Login = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -14,10 +14,12 @@ const Login = () => {
   } = useForm();
 
   const {
+    processSignUp,
     signInUsingGoogle,
-    processEmailSignIn,
+    updateUserProfile,
     setIsLoading,
     setError,
+    setUserName,
     error,
   } = useAuth();
 
@@ -28,21 +30,24 @@ const Login = () => {
   const redirect_uri = location.state?.from || '/home';
 
   const onSubmit = (data) => {
-    return processEmailSignIn(data.email, data.password)
+    setUserName(data.name);
+
+    processSignUp(data.email, data.password)
       .then(() => {
+        updateUserProfile(data.name);
         history.push(redirect_uri);
         setIsLoading(false);
       })
       .catch((error) => setError(error.message));
   };
 
-  const handleGoogleSignIn = () => {
+  const handleGoogleSignUp = () => {
     signInUsingGoogle()
       .then(() => {
         history.push(redirect_uri);
         setIsLoading(false);
       })
-      .catch((error) => setError(error.message));
+      .then((error) => setError(error.message));
   };
 
   const handleError = () => {
@@ -50,24 +55,43 @@ const Login = () => {
   };
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 270px)' }} className="mb-3">
+    <div style={{ minHeight: 'calc(100vh - 200px)' }}>
       <h3 className="d-3 my-3 text-center text-primary fw-bold">
-        Login to Foodly
+        Register in Foodly
       </h3>
       <form
         className="form w-50 mx-auto"
         onSubmit={handleSubmit(onSubmit)}
         style={{ maxWidth: 600 }}
       >
-        {/* go to register page */}
+        {/* go to login page */}
         <div className="w-75 mx-auto mb-3 mt-2">
-          <span className="pe-1">Don't have an account</span>
-          <Link to="/register">create one</Link>
+          <span className="pe-1">Already registerd?</span>
+          <Link to="/login">Login here.</Link>
         </div>
+        {/* name of the user */}
+        <input
+          className="w-75 d-block mx-auto form-control"
+          placeholder="name"
+          {...register('name', {
+            required: 'this is a required field',
+            minLength: {
+              value: 3,
+              message: 'Your name should be at least 3 characters',
+            },
+            maxLength: {
+              value: 20,
+              message: "Your name shouldn't exceed 6 characters",
+            },
+          })}
+        />
+        {errors.name && (
+          <p className="text-danger w-75 mx-auto">{errors.name.message}</p>
+        )}
+
         {/* email of the user */}
         <input
-          onFocus={handleError}
-          className="w-75 d-block mx-auto form-control"
+          className="w-75 d-block mx-auto mt-3 form-control"
           placeholder="Email"
           {...register('email', {
             required: 'this is a required field',
@@ -87,7 +111,6 @@ const Login = () => {
         {/* password of the user */}
         <input
           type="password"
-          onFocus={handleError}
           placeholder="password"
           className="mt-3 w-75 mx-auto d-block form-control"
           {...register('password', {
@@ -110,26 +133,28 @@ const Login = () => {
         )}
 
         {/* show the firebase error */}
-        <div className="text-warning text-center">{error}</div>
+        <div className="text-warning text-center" onBlur={handleError}>
+          {error}
+        </div>
 
         <input
           className="btn btn-primary my-3 text-white w-50 d-block mx-auto"
           type="submit"
-          value="login"
+          value="Register"
         />
 
         <Button
-          onClick={handleGoogleSignIn}
-          variant="info"
+          variant="success"
           className="text-white w-50 d-block mx-auto"
+          onClick={handleGoogleSignUp}
           style={{ minWidth: 150 }}
         >
           <FontAwesomeIcon icon={faGoogle} />
-          <span className="ms-3">Login With Google</span>
+          Register With Google
         </Button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
