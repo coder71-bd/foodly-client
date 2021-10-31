@@ -39,14 +39,14 @@ const PlaceOrder = ({ orderedFood }) => {
   return (
     <div className="mt-3" style={{ minHeight: 'calc(100vh - 270px)' }}>
       {orderedFood?.image && (
-        <div className="text-danger my-3">
+        <div className="my-3 d-flex flex-column justify-content-center align-items-center">
           <img
             className="img-fluid"
-            style={{ maxWidth: 200 }}
+            style={{ maxWidth: 350 }}
             src={orderedFood.image}
             alt={orderedFood.name}
           />
-          <div>{orderedFood?.name}</div>
+          <div className="text-center">{orderedFood?.name}</div>
         </div>
       )}
 
